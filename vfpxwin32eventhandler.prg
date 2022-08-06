@@ -98,6 +98,9 @@ DEFINE CLASS VFPxWin32EventHandler AS Collection
 			* Unbinds all events associated with this object. This includes events that are bound 
 			*	to it as an event source and its delegate methods that serve as event handlers.
 			UnBindEvents(thWnd)
+		CASE Pcount() = 2
+			* Unbind specific event/message
+			UnBindEvents(thWnd, tnMessage)
 		CASE Pcount() = 4
 			If !Empty(tnMessage)
 				* Unbind specific event/message
@@ -116,8 +119,10 @@ DEFINE CLASS VFPxWin32EventHandler AS Collection
 				ENDFOR
 			EndIf 
 		Otherwise
-			Assert .f. Message "UnBindEvents requires 1 or 4 parameters. Syntax: " + Chr(13) + Chr(13) + ;
-				"UnBindEvents(oEventObject)" + Chr(13) + "UnBindEvents(thWnd, tnMessage, toEventHandler, tcDelegate)"
+			Assert .f. Message "UnBindEvents requires 1, 2, or 4 parameters. Syntax: " + Chr(13) + Chr(13) + ;
+				"UnBindEvents(oEventObject)" + Chr(13) + ;
+				"UnBindEvents(thWnd, tnMessage)" + Chr(13) + ;
+				"UnBindEvents(thWnd, tnMessage, toEventHandler, tcDelegate)"
 		ENDCASE
 
 		This.CleanupEvents()
