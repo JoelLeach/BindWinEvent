@@ -70,8 +70,8 @@ DEFINE CLASS VFPxWin32EventHandler AS Collection
 			this.hdlDebug = FCREATE("GKKWin32EventHandler.log",0)
 		ENDIF
 		
-		IF !('FoxTabsDeclareAPI' $ SET( 'Procedure' ))
-			SET PROCEDURE TO FoxTabsDeclareAPI ADDITIVE
+		IF !('BINDWINEVENTAPI' $ Upper(SET( 'Procedure' )))
+			SET PROCEDURE TO BindWinEventAPI ADDITIVE
 		ENDIF
 
 		* Store handle for use in CallWindowProc
